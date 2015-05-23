@@ -1,4 +1,8 @@
-CFLAGS =	-g -O0 -D_BSD_SOURCE
+CFLAGS =	-Wall -Wextra -pedantic -Wshadow -Wpointer-arith -Wcast-align
+CFLAGS +=	-Wwrite-strings -Wmissing-prototypes -Wmissing-declarations
+CFLAGS +=	-Wnested-externs -Winline -Wno-long-long  -Wunused-variable
+CFLAGS +=	-Wstrict-prototypes -Werror
+CFLAGS +=	-std=c99 -static -D_XOPEN_SOURCE -D_BSD_SOURCE
 
 .PHONY: all
 all: battstat
@@ -8,3 +12,4 @@ battstat: battstat.c
 
 clean:
 	rm -f battstat
+

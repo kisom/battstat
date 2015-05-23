@@ -54,6 +54,7 @@ const size_t	 MAX_NAME_LEN  = 32;
 static void
 shutdown(int flag)
 {
+	flag = 0;
 	exit(EXIT_SUCCESS);
 }
 
@@ -78,9 +79,9 @@ static void *
 collect_stats(void *args)
 {
 	struct snapshot	 snap;
-	int		 n;
-	time_t		 now;
 	char		*errors;
+
+	args = NULL;
 
 	snap.percentage = batteries[battno].percentage;
 	snap.state = batteries[battno].charge_state;
