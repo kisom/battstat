@@ -116,11 +116,13 @@ collect_stats(void *args)
 static void
 usage(void)
 {
-	printf("Usage: %s [-b battery] [-d] [-f statfile] [-h]\n", progname);
+	printf("Usage: %s [-b battery] [-d] [-f statfile] [-h] [-t delay]\n",
+	    progname);
 	printf("\t-b battery\tSelect the battery name to monitor.\n");
 	printf("\t-d\t\tDon't daemonise; run in the foreground.\n");
 	printf("\t-f statfile\tSpecify the file to write statistics to.\n");
 	printf("\t-h\t\tPrint this help message.\n");
+	printf("\t-t delay\tSpecify the delay in seconds between updates.\n");
 }
 
 
@@ -137,6 +139,7 @@ main(int argc, char *argv[])
 	int		 i  = 0;
 	int		 nodaemon = 0;
 	int		 logopts = LOG_CONS|LOG_PID;
+	int		 delay = 60;
 
 	progname = strndup(argv[0], PATH_MAX);
 	if (NULL == progname) {
@@ -157,6 +160,9 @@ main(int argc, char *argv[])
 		case 'h':
 			usage();
 			return EXIT_SUCCESS;
+		case 't':
+			delay = atoi(optarg);
+			break;
 		default:
 			/* NOTREACHED */
 			usage();
@@ -232,8 +238,9 @@ main(int argc, char *argv[])
 			syslog(LOG_ERR, "failed to detach thread");
 			exit(EXIT_FAILURE);
 		}
-		sleep(10);
+		sleep(delay);
 	}
 
 	return EXIT_SUCCESS;
 }
+
