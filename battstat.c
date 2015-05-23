@@ -199,7 +199,6 @@ main(int argc, char *argv[])
 		    bname);
 	}
 
-
 	if (NULL == (statfile = fopen(statpath, "a"))) {
 		err(EXIT_FAILURE, "opening stat file failed");
 	}
