@@ -12,8 +12,8 @@ struct snapshot {
 	/* The percentage of the battery remaining (between 0 and 100). */
         uint32_t        percentage;
 
-	/* ACPI state of battery. */
-        uint32_t        state;
+	/* Padding */
+        uint32_t        pad;
 
 	/* When was the snapshot taken? */
         uint64_t        when;
