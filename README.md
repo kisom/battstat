@@ -67,6 +67,23 @@ Usage: ./battstat [-b battery] [-d] [-f statfile] [-h] [-t delay]
 This only works on Linux.
 
 
+## Notes
+
+The ACPI charging state (i.e. charging/discharging) didn't seem to be updating,
+so I've marked those 4 bytes as unused. Ideas for things they could be used
+for:
+
+* brightness: this may be the largest killer of battery life
+* wireless activity: also a major factor in battery life
+
+The charge and state section take up 64 bytes. This section could be
+rearranged: as the charge is a percentage, its range is 0-100. This
+could be stored in a `uin8_t`; the brightness should also be a `uint8_t`,
+which means that 62 bytes would be available for additional data.
+
+The brightness would have to be read from the `/sys` file system, I assume.
+
+
 ## License
 
 `battstat` is released under the MIT license. See the LICENSE file for
